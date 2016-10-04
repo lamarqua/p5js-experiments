@@ -22,7 +22,7 @@ function pixel(x, y) {
 }
 
 function gen_star() {
-    return { "x": rand_int(WIDTH), "y": rand_int(HEIGHT), "plane" : rand_int(MAX_PLANES) };
+    return { "x": rand_int(WIDTH), "y": rand_int(HEIGHT), "plane" : rand_range(1, MAX_PLANES) };
 }
 
 function setup() {
@@ -40,19 +40,17 @@ function setup() {
 }
 
 function draw() {
-    background(0);
+    background(0, 0, 0);
     var i;
     for (i = 0; i < MAX_STARS; ++i) {
         var color = 40 + ((255 - 40) / MAX_PLANES) * g_Stars[i].plane;
-        // console.log(color);
-        // stroke(color);
         fill(color);
         pixel(g_Stars[i].x, g_Stars[i].y);
 
         g_Stars[i].x += BASE_SPEED * g_Stars[i].plane;
         if (g_Stars[i].x >= WIDTH) {
             g_Stars[i].x = 0;
-            g_Stars[i].y = rand_int(WIDTH);
+            g_Stars[i].y = rand_int(HEIGHT);
         }
     }
 }
